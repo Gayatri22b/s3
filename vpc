@@ -1,0 +1,8 @@
+vpc
+rm -rf known_hosts
+rm -rf known_hosts.old
+cat id_rsa.pub
+vim authorized_keys
+cd
+echo hello my name is gayatri > abc.txt
+scp abc.txt root@10.0.0.4:/data
