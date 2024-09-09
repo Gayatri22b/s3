@@ -1,0 +1,15 @@
+volume
+mkdir lsblk
+blkid
+mkfs.ext4/dev /xvdb
+vim /etc/fstab
+mount /dev/xvdb /data
+df-h
+G  0 disk /data
+vim /etc/fstab
+ systemctl daemon-reload
+ umount /data
+ lsblk
+
+resize2fs /dev/xvdb
+xfs_growfs -d /dev/xvda1
