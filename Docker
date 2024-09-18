@@ -1,0 +1,216 @@
+Docker : container engine 
+
+Why containerization preferred to virtualization? 
+
+
+AD :Active Directory.
+
+
+Hypervisor - type 1, type 2  ex. EXSI- VMware , rhev - Redhat , xen - citrix, Hyper-V - Microsoft.
+Virtualization of hardware. 
+
+Container : virtualization of os. : Collection of dependencies and binary(bin) files.
+To deploy container we need  container-runtime(runc) 
+-Microservices can be run on container. 
+RUN-C: ex. Docker, container-D, podman, kata, rkt, drawbridge, crio 
+
+OCI: open container initiative.
+
+Containers are not os dependent. 
+container can talk to each other but not talk to os .
+Containers communicate with runc like docker, rhev etc.
+Veth network is formed when we launch container, in runtime.
+
+Docker - open source and enterprise.
+Same applications can be run with different versions using microservices.
+
+Vm always reserve resources. It can't be rebuild. 
+In case of container resources are not reserved as it only require os .
+Container orchestration tool needed to rebuild such as k8s, openshift. as it creates multiple replicas of container.
+container can be deployed using container image
+container image contains bin and os.
+Docker hub contains images. 
+docker build- create image docker commands 
+   		docker pull
+		docker run 
+
+Images are immutable and container are immutable.
+By default there is os called podman in redhat /centos 
+Registry - collection of multiple repository
+collections of multiple module: repository.
+If we want to pull need not to register.
+if we want to commit we have to register.
+Tags shows multiple versions of an image.
+docker ps -a will give container id for monitoring. 
+docker rename previous_name new_name : to rename the docker existing. 
+
+Uninstall podman >> install docker >> 
+overlay network and under lay network , docker 0 handls communication in containers. 
+ 
+
+
+
+Launch instance with redhat ami >> hostnamectl set-hostname docker.example.com >> yum update -y >> rpmquery docker-ce >> google docker install (choose commands and copy paste) >> yum repolist >> docker info >> systemctl start docker >> systemctl enable docker >> docker info >> docker status >> docker image >> go to google (docker hub )  >> search httpd >> copy command and run on terminal >> docker images >>  docker pull ubuntu >> docker ps (to list container running, ) >> docker images >> ip a s >> docker run -it --name web-app ubuntu:latest /bin/bash >> ls >> cat /etc/os-realese >> apt update -y >> apt install apache2 -y >> cd /var/www/html >> cat > index.html >> "this is file" >> service apache2 start >> docker attach web-app >> cd /tmp >> touch a.txt >> press ctr+p Ctrl +q >> curl http://172.17.0.2 >> go to aws add port 80 http to security group >> service reatrt by attaching container  >> service start apache2 >> ctrlp+q >> curl http://172.17.0.2 >> launch another container >> 
+docker run --name top-noch -p 8080:80 ubuntu:latest /bin/bash >> 
+
+on another instance of same instace >> id >> docker ps >> docker inspect web-app | less >> 
+
+
+
+ docker0: <NO-CARRIER,BROADCAST,MULTICAST,UP> mtu 1500 qdisc noqueue state DOWN group default
+    link/ether 02:42:e3:1d:b4:1d brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.1/16 brd 172.17.255.255 scope global docker0
+       valid_lft forever preferred_lft forever: veth network id
+it- interactive mode
+docker0 : it is docker host ip
+ 
+Port forwarding : Accessibility of container is public. 
+Running different application on same container/public ip  , it is called as virtual hosting .
+ephemeral storage : temporary storage if in case container crashed/killed
+docker volume is persistent storage. 
+
+
+docker run -it --name myapp -p 3600:80 ubuntu:latest /bin/bash
+apt update -y
+apt install apache2
+add custom port to sg.
+
+docker kill my-app:will kill container .
+volume cant be attached to existing container. 
+
+
+Docker volume ls : to check volume availability.
+docker --help : for help  purpose .
+
+docker volume create my-vol  is is stored in cd /var/lib/docker/volumes/vol_name/_data
+
+docker run -it --name data-app -p 1234:80 -v my-vol:/var/www/html ubuntu:latest /bin/bash ::: to mount volume to this ip.
+
+Commands to run nginx image inside docker
+docker run -it --name this1 -p 9090:80 nginx:latest /bin/bash
+  104  docker images -a
+  105  docker ps
+  106  docker commit -this1
+  107  docker commit this1
+  108  docker images -a
+  109  docker tag dee80f45b6fb cust-img
+  110  docker images -a
+  111  history
+Commands inside the container after connection 
+container can be connected using docker attach container_name 
+
+1  cd /usr/share/nginx/html
+    2  ls
+    3  echo "this is content" > index.html
+    4  cat index.html
+    5  cd
+    6  service nginx start
+    7  service start nginx
+    8  service nginx start
+    9  history
+
+Running containers can be accessed through following command
+docker exec -it container_name /bin/bash
+Website for reffral :https://www.dataset.com/blog/create-docker-image/ 
+
+
+===============================================================================
+k8s (Kubernetes): it is PAAS(platform as service ). 
+orchestration tool : to manage containers efficiently. 
+POD: in k8s Smallest unit is pod , it contains container , inside container there are micro services.
+footprint Lighter than docker swarm.
+
+worker node : it stores the pod .
+
+k8s benifits : rolling update (roll back), auto scaling, compute storage, storage management.
+
+Amazon : EKS 
+gogle : GKE
+
+Components : master , nodes : master - controller , nodes  - 
+Kube-api server will available on master.
+
+kublet is captain of ship.
+ETCD cluster is log book for k8s.
+Kubectl is cli to send commands to api server.
+
+
+Hosting k8s using cloud vm 
+requirement 
+master node : 2 core cpu, 4gb ram ,16 gb rom (t2.medium) 
+worker node 1 core cpu ,  
+Ubuntu Server 22.04 LTS sleect this one. 
+
+kubeadm installation .
+swap partition must be disabled on every node to host Kubernetes.
+
+Set password for root and add hostname is /etc/hosts file.
+Machines should be able to ping with name as well as ip address. in real time scenario. 
+Hosts details should be available to every system, so that it can be ping.
+
+iptables is a firewall.
+Always install os, then crio then k8s .
+kubeadm init it shows the controller ndoe. (kubeadmin)
+
+kubectl get node
+kubectl get pod -a
+
+kubectl get node -o wide : to get detailed info.
+
+
+kubeadm join 172.31.12.15:6443 --token 2qco2q.2t1tr5nrtwnetjg3 \
+        --discovery-token-ca-cert-hash sha256:d1e780bbceb5609eabbb71de3b08e618a8e8ae5e65e905714d78f52f7c4778f2
+
+
+
+
+=====================================================
+
+calcio is for communication betn pods.
+Name and ips captured by paused., when rebuild the pods it will assign same names and pods.
+
+Quality of service (QOS) :
+It is qualities when we deploy pod. 
+
+Best Effort : default qos (when we do not specify the limits it choose best effort )
+Burstable : Pod ahs request of "limit" set. Minimum limits guaranteed.  
+Guaranteed : Highest priority pods can be generated. Generally high priority application are deployed 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
