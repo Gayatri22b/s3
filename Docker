@@ -50,7 +50,7 @@ overlay network and under lay network , docker 0 handls communication in contain
 
 
 
-Launch instance with redhat ami >> hostnamectl set-hostname docker.example.com >> yum update -y >> rpmquery docker-ce >> google docker install (choose commands and copy paste) >> yum repolist >> docker info >> systemctl start docker >> systemctl enable docker >> docker info >> docker status >> docker image >> go to google (docker hub )  >> search httpd >> copy command and run on terminal >> docker images >>  docker pull ubuntu >> docker ps (to list container running, ) >> docker images >> ip a s >> docker run -it --name web-app ubuntu:latest /bin/bash >> ls >> cat /etc/os-realese >> apt update -y >> apt install apache2 -y >> cd /var/www/html >> cat > index.html >> "this is file" >> service apache2 start >> docker attach web-app >> cd /tmp >> touch a.txt >> press ctr+p Ctrl +q >> curl http://172.17.0.2 >> go to aws add port 80 http to security group >> service reatrt by attaching container  >> service start apache2 >> ctrlp+q >> curl http://172.17.0.2 >> launch another container >> 
+Launch instance with redhat ami >> hostnamectl set-hostname docker.example.com >> yum update -y >> rpmquery docker-ce >> google docker install (choose commands and copy paste) >> yum repolist >> docker info >> systemctl start docker >> systemctl enable docker >> docker info >> docker status >> docker image >> go to google (docker hub )  >> search httpd >> copy command and run on terminal >> docker images >>  docker pull ubuntu >> docker ps (to list container running, ) >> docker images >> ip a s >> docker run -it --name web-app ubuntu:latest /bin/bash >> ls >> cat /etc/os-realese >> apt update -y >> apt install apache2 -y >> cd /var/www/html >> cat > index.html >> echo "this is file"> hello.html >> service apache2 start >> docker attach web-app >> cd /tmp >> touch a.txt >> press ctr+p Ctrl +q >> curl http://172.17.0.2 >> go to aws add port 80 http to security group >> service reatrt by attaching container  >> service start apache2 >> ctrlp+q >> curl http://172.17.0.2 >> launch another container >> 
 docker run --name top-noch -p 8080:80 ubuntu:latest /bin/bash >> 
 
 on another instance of same instace >> id >> docker ps >> docker inspect web-app | less >> 
@@ -178,6 +178,66 @@ Guaranteed : Highest priority pods can be generated. Generally high priority app
 
 
 
+
+
+
+
+
+1  rpmquery docker
+    2  yum update -y
+    3  yum install docker
+    4  sudo yum install -y yum-utils
+    5  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+    6  yum repolist
+    7  docker info
+    8  sysytemctl status docker
+    9  hostnamectl set-hostname docker.example.com
+   10  bash
+   11  sudo yum install -y yum-utils
+   12  sudo yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+   13  sudo yum install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+   14  systemctl start docker
+   15  yum install docker*
+   16  systemctl enable docker
+   17  systemctl start docker
+   18  yum repolist
+   19  docker ps a
+   20  docker ps -qa
+   21  docker ps -a
+   22  docker images
+   23  docker pull ubuntu
+   24  docker images
+   25  docker run -it --name web -p 8080:80 ubuntu:latest /bin/bash
+   26  docker attach web
+   27  docker ps -a
+   28  docker attach web
+   29  docker pull nginx
+   30  docker images
+   31  docker run -it --name niginx-server -p 8090:80 nginx:latest /bin/bash
+   32  docker ps -a
+   33  docker attach niginx-server
+   34  docker volume
+   35  docker volume ls
+   36  docker volume create my-volume
+   37  ls -la
+   38  docker volume ls
+   39  docker run -it --name nginx-2 -p 8081:80 -v my-volume:/usr/share/nginx/html nginx:latest /bin/bash
+   40  docker ps -a
+   41  docker attach nginx-2
+   42  docker ps -a
+   43  docker kill web
+   44  docker -ps
+   45  docker ps -a
+   46  docker volume ls
+   47  cd /usr/lib/docker/nginx/
+   48  cd /var/lib/docker/
+   49  ls -la
+   50  cd volumes/
+   51  ls -la
+   52  cd my-volume/
+   53  ls -la
+   54  cd _data
+   55  ls -la
 
 
 
