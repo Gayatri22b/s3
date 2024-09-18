@@ -37,3 +37,16 @@ host EKS CLUSTER
 
  When You want to delete cluster
  eksctl delete cluster --name my-cluster
+mkdir /pods
+cd /pods
+vim pod-one.yaml
+kubectl apply -f pod-one.yml
+export KOPS_STATE_STORE=s3://dev.k8s.gayatri.com
+aws s3 ls
+kops update cluster dev.k8s.gayatri.com --yes --admin
+kubectl get pod
+kubectl get pod webapplication -o wide
+kubectl describe pod webapplication
+kubectl get pods -o wide
+
+
