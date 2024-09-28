@@ -57,7 +57,7 @@ terminal
  
 ansible --version
  
-cd /etc/ansible
+cat /etc/ansible
 
 pwd
 
